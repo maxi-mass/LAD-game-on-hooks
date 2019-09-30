@@ -1,12 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Column from './../Column/Column';
+import Column from './Column/Column';
+import {Link} from "react-router-dom";
 
 const Table = ({board, message, initGame, play}) => {
     return (
         <div>
             <p className="message">{message}</p>
             <div className="button" onClick={() => {initGame()}}>Начать новую</div>
+            <div className="button">
+                <Link to={{
+                    pathname: "/game-over",
+                    state: {
+                        isGameOver: true
+                    }
+                }}>Закончить игру</Link>
+            </div>
             <table>
                 <thead>
                 </thead>
