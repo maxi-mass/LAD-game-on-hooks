@@ -8,14 +8,6 @@ const Table = ({board, message, initGame, play}) => {
         <div>
             <p className="message">{message}</p>
             <div className="button" onClick={() => {initGame()}}>Начать новую</div>
-            <div className="button">
-                <Link to={{
-                    pathname: "/game-over",
-                    state: {
-                        isGameOver: true
-                    }
-                }}>Закончить игру</Link>
-            </div>
             <table>
                 <thead>
                 </thead>

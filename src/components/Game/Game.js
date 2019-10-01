@@ -24,17 +24,14 @@ const Game = (props) => {
     };
 
     const play = (c) => {
-            if (isGameOver) { return }
-            
-            axios.post('http://localhost:4000/play', {columnIndex: c, currentPlayer}).then(response => { 
-                let serverState = response.data;
-    
-                setBoard(serverState.board);
-                setCurrentPlayer(serverState.currentPlayer);
-                setMessage(serverState.message);
-                setIsGameOver(serverState.isGameOver);     
-            });
-        
+        axios.post('http://localhost:4000/play', {columnIndex: c, currentPlayer}).then(response => {
+            let serverState = response.data;
+
+            setBoard(serverState.board);
+            setCurrentPlayer(serverState.currentPlayer);
+            setMessage(serverState.message);
+            setIsGameOver(serverState.isGameOver);
+        });
     };
 
     useEffect(() => {
@@ -44,7 +41,12 @@ const Game = (props) => {
     if (!props.location.state) {
         return <Redirect to={"/"} />
     }
-
+    if (isGameOver) {
+        return <Redirect to={{
+            pathname: "/game-over",
+            state: {message}
+        }}/>
+    }
     return <Table
         board={board}
         message={message}
